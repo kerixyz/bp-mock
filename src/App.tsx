@@ -130,6 +130,7 @@ function App() {
             sections={formData.sections}
             currentSectionId={formData.currentSectionId}
             eligibility={formData.eligibility}
+            formData={formData}
           />
         </div>
       </div>

@@ -23,7 +23,7 @@ export function validateFieldInput(
 
   switch (field.type) {
     case 'text':
-      return validateText(trimmedInput, field);
+      return validateText(trimmedInput);
     case 'number':
       return validateNumber(trimmedInput, field);
     case 'date':
@@ -39,21 +39,8 @@ export function validateFieldInput(
   }
 }
 
-// Text validation (for first-name, last-name, ssn)
-function validateText(input: string, field: FormField): ValidationResult {
-  if (field.id === 'ssn') {
-    // SSN validation: XXX-XX-XXXX or XXXXXXXXX
-    const ssnPattern = /^\d{3}-?\d{2}-?\d{4}$/;
-    if (!ssnPattern.test(input)) {
-      return {
-        isValid: false,
-        errorMessage: "Please enter a valid SSN (e.g., 123-45-6789 or 123456789)"
-      };
-    }
-    // Normalize SSN format (store without dashes)
-    return { isValid: true, parsedValue: input.replace(/-/g, '') };
-  }
-
+// Text validation (for first-name, last-name)
+function validateText(input: string): ValidationResult {
   // Generic text validation
   if (input.length < 1) {
     return { isValid: false, errorMessage: "This field cannot be empty" };

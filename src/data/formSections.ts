@@ -28,13 +28,6 @@ export const delawareAssistSections: FormSection[] = [
         value: null,
         required: true,
       },
-      {
-        id: 'ssn',
-        label: 'Social Security Number',
-        type: 'text',
-        value: null,
-        required: true,
-      },
     ],
   },
   {

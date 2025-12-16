@@ -41,8 +41,6 @@ function generateTextQuestion(field: FormField, pronoun: string): string {
       return `What is ${pronoun} first name?`;
     case 'last-name':
       return `What is ${pronoun} last name?`;
-    case 'ssn':
-      return `What is ${pronoun} Social Security Number? (You can enter it with or without dashes, e.g., 123-45-6789)`;
     default:
       return `${field.label}?`;
   }
@@ -118,9 +116,6 @@ export function generateConfirmationMessage(
     displayValue = value.join(', ');
   } else if (typeof value === 'boolean') {
     displayValue = value ? 'Yes' : 'No';
-  } else if (field.id === 'ssn' && typeof value === 'string') {
-    // Mask SSN for display
-    displayValue = `***-**-${value.slice(-4)}`;
   } else if (field.id === 'date-of-birth' && typeof value === 'string') {
     // Format date nicely
     const date = new Date(value);

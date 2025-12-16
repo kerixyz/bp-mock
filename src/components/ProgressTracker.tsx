@@ -1,20 +1,27 @@
-import React from 'react';
-import { FormSection, EligibilityInfo } from '../types';
-import { CheckCircle2, Circle, AlertCircle } from 'lucide-react';
+import { FormSection, EligibilityInfo, FormData } from '../types';
+import { CheckCircle2, Circle, AlertCircle, Download } from 'lucide-react';
+import { generatePDF } from '../utils/pdfGenerator';
 
 interface ProgressTrackerProps {
   sections: FormSection[];
   currentSectionId: string;
   eligibility: EligibilityInfo[];
+  formData: FormData;
 }
 
-export const ProgressTracker: React.FC<ProgressTrackerProps> = ({
+export const ProgressTracker = ({
   sections,
   currentSectionId,
   eligibility,
-}) => {
+  formData,
+}: ProgressTrackerProps) => {
   const completedCount = sections.filter((s) => s.completed).length;
   const progressPercentage = (completedCount / sections.length) * 100;
+  const isComplete = completedCount === sections.length;
+
+  const handleExportPDF = () => {
+    generatePDF(formData);
+  };
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -123,6 +130,22 @@ export const ProgressTracker: React.FC<ProgressTrackerProps> = ({
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* PDF Export Button */}
+        {isComplete && (
+          <div className="mt-6">
+            <button
+              onClick={handleExportPDF}
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-colors flex items-center justify-center gap-2"
+            >
+              <Download size={20} />
+              Download Application as PDF
+            </button>
+            <p className="text-xs text-gray-600 text-center mt-2">
+              Save a copy of your completed application for your records
+            </p>
           </div>
         )}
       </div>
