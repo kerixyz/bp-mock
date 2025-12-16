@@ -107,16 +107,12 @@ export const delawareAssistSections: FormSection[] = [
     fields: [
       {
         id: 'benefit-types',
-        label: 'Select all that apply',
+        label: 'Benefits you are interested in',
         type: 'checkbox',
         value: null,
         options: [
-          'Food Assistance (SNAP)',
-          'Cash Assistance (TANF)',
-          'Medical Assistance (Medicaid)',
-          'Child Care Assistance',
-          'Energy Assistance (LIHEAP)',
-          'General Assistance',
+          'SNAP (Food Assistance)',
+          'WIC (Women, Infants, and Children)',
         ],
         required: true,
       },

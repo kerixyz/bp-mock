@@ -1,5 +1,7 @@
 export type UserRole = 'self' | 'child-for-parent';
 
+export type ConversationState = 'awaiting_input' | 'validating' | 'processing';
+
 export interface Message {
   id: string;
   role: 'user' | 'assistant';
@@ -19,7 +21,7 @@ export interface FormField {
   id: string;
   label: string;
   type: 'text' | 'number' | 'select' | 'radio' | 'checkbox' | 'date';
-  value: string | number | boolean | null;
+  value: string | number | boolean | string[] | null;
   options?: string[];
   required: boolean;
 }
@@ -33,6 +35,16 @@ export interface EligibilityInfo {
 export interface FormData {
   userRole: UserRole | null;
   currentSectionId: string;
+  currentFieldIndex: number;
+  currentFieldId: string | null;
+  conversationState: ConversationState;
+  lastValidationError: string | null;
   sections: FormSection[];
   eligibility: EligibilityInfo[];
+}
+
+export interface ValidationResult {
+  isValid: boolean;
+  errorMessage?: string;
+  parsedValue?: string | number | boolean | string[] | null;
 }
